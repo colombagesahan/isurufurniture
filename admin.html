@@ -1,1 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Isuru Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f5; margin: 0; padding: 0; color: #333; }
+        
+        /* Theme for Admin */
+        :root {
+            --admin-primary: #0f2b46;
+            --admin-gold: #c5a059;
+        }
 
+        /* Login */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--admin-primary); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .login-box { background: white; padding: 40px; border-radius: 8px; text-align: center; width: 320px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .login-box h3 { color: var(--admin-primary); margin-top: 0; margin-bottom: 5px; }
+        .login-box p { margin-bottom: 20px; font-size: 0.9em; color: #777; }
+        .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        /* Dashboard */
+        .container { max-width: 900px; margin: 40px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: var(--admin-primary); border-bottom: 3px solid var(--admin-gold); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        h2 a { font-size: 0.5em; color: #666; text-decoration: none; font-weight: normal; }
+        h2 a:hover { text-decoration: underline; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: inherit; }
+        input:focus, textarea:focus { outline: none; border-color: var(--admin-gold); }
+        
+        .radio-group { background: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #eee; display: flex; gap: 20px; align-items: center; }
+        .radio-group label { margin: 0; font-weight: normal; cursor: pointer; }
+        
+        .btn { background: var(--admin-primary); color: white; border: none; padding: 12px 25px; cursor: pointer; border-radius: 5px; font-weight: 600; font-size: 1em; transition: background 0.3s; }
+        .btn:hover { background: #2c4a6b; }
+        .btn-red { background: #c0392b; font-size: 0.9em; padding: 8px 15px; }
+        .btn-red:hover { background: #a93226; }
+
+        /* List */
+        .product-list { margin-top: 40px; }
+        .admin-product-card { display: flex; align-items: center; background: #fff; border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 6px; border-left: 4px solid var(--admin-gold); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .admin-product-card img { width: 70px; height: 70px; object-fit: cover; margin-right: 20px; border-radius: 4px; }
+        .admin-product-info { flex-grow: 1; }
+        .admin-product-info h4 { margin: 0 0 5px 0; color: var(--admin-primary); font-size: 1.1em; }
+        .admin-product-info p { margin: 0; font-size: 0.9em; color: #777; }
+        
+        #dashboard { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Login -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <h3>Isuru Furniture</h3>
+            <p>Administration Panel</p>
+            
+            <input type="email" id="adminEmail" placeholder="Email" required>
+            <input type="password" id="adminPass" placeholder="Password" required>
+            
+            <button class="btn" onclick="checkLogin()" style="width:100%; margin-top: 10px;">Login</button>
+            <p id="loginError" style="color: #e74c3c; display: none; margin-top: 15px; font-weight: bold;">Access Denied</p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="container">
+        <h2>
+            Add New Inventory
+            <a href="index.html"><i class="fas fa-external-link-alt"></i> Go to Website</a>
+        </h2>
+        
+        <form id="addProductForm">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="pName" placeholder="e.g. Luxury Teak Sofa Set" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="pDesc" rows="4" placeholder="Wood type, fabric details, warranty info..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Upload Image</label>
+                <input type="file" id="pImage" accept="image/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Price Display</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="priceOption" name="priceType" value="price" checked onclick="togglePriceInput(true)"> 
+                        <label for="priceOption">Show Price</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="callOption" name="priceType" value="call" onclick="togglePriceInput(false)"> 
+                        <label for="callOption">"Call for Price"</label>
+                    </div>
+                </div>
+                <input type="number" id="pPrice" placeholder="Enter Price in Rs." style="margin-top: 15px;">
+            </div>
+            
+            <button type="submit" class="btn" id="publishBtn"><i class="fas fa-cloud-upload-alt"></i> Publish Item</button>
+        </form>
+
+        <h2 style="margin-top: 50px; border-bottom-color: #ddd;">Current Inventory</h2>
+        <div id="adminProductList" class="product-list">
+            <p style="text-align: center; color: #666;">Loading database...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBUjzMFao9BS3uXBOW3qYrLVqHaGn8qIk4",
+          authDomain: "onlineshop-30cd1.firebaseapp.com",
+          projectId: "onlineshop-30cd1",
+          storageBucket: "onlineshop-30cd1.firebasestorage.app",
+          messagingSenderId: "818252574868",
+          appId: "1:818252574868:web:8dd36825db589a886cc481",
+          measurementId: "G-6YLGGH2NDD"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // --- AUTHENTICATION ---
+        window.checkLogin = function() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            
+            // Updated Credentials for Isuru Furniture
+            if (email === 'isurufurniture777@gmail.com' && pass === 'admin123') {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadAdminProducts();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        // --- UI LOGIC ---
+        window.togglePriceInput = function(show) {
+            const input = document.getElementById('pPrice');
+            input.style.display = show ? 'block' : 'none';
+            if(!show) input.value = '';
+        }
+
+        // --- ADD PRODUCT ---
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('publishBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Uploading...";
+            btn.disabled = true;
+
+            const name = document.getElementById('pName').value;
+            const desc = document.getElementById('pDesc').value;
+            const imageFile = document.getElementById('pImage').files[0];
+            const priceType = document.querySelector('input[name="priceType"]:checked').value;
+            const price = document.getElementById('pPrice').value;
+
+            try {
+                // 1. Upload Image
+                const storageRef = ref(storage, 'products/' + Date.now() + '-' + imageFile.name);
+                await uploadBytes(storageRef, imageFile);
+                const imageUrl = await getDownloadURL(storageRef);
+
+                // 2. Save Data
+                await addDoc(collection(db, "products"), {
+                    name: name,
+                    description: desc,
+                    imageUrl: imageUrl,
+                    priceType: priceType,
+                    price: priceType === 'price' ? Number(price) : 0,
+                    createdAt: serverTimestamp()
+                });
+
+                alert('Product Published Successfully!');
+                document.getElementById('addProductForm').reset();
+                togglePriceInput(true);
+                loadAdminProducts();
+
+            } catch (error) {
+                console.error("Error: ", error);
+                alert("Upload failed: " + error.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // --- LOAD LIST ---
+        async function loadAdminProducts() {
+            const listDiv = document.getElementById('adminProductList');
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                listDiv.innerHTML = '';
+                
+                if (querySnapshot.empty) {
+                    listDiv.innerHTML = '<p style="text-align:center;">No products in database.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const item = document.createElement('div');
+                    item.className = 'admin-product-card';
+                    item.innerHTML = `
+                        <img src="${data.imageUrl}" alt="product">
+                        <div class="admin-product-info">
+                            <h4>${data.name}</h4>
+                            <p>${data.priceType === 'call' ? 'Call for Price' : 'Rs. ' + data.price}</p>
+                        </div>
+                        <button class="btn btn-red" onclick="deleteProduct('${docSnap.id}')"><i class="fas fa-trash-alt"></i> Remove</button>
+                    `;
+                    listDiv.appendChild(item);
+                });
+            } catch (error) {
+                listDiv.innerHTML = '<p style="color:red">Error loading list.</p>';
+            }
+        }
+
+        // --- DELETE PRODUCT ---
+        window.deleteProduct = async function(id) {
+            if(confirm("Are you sure you want to permanently delete this product?")) {
+                try {
+                    await deleteDoc(doc(db, "products", id));
+                    loadAdminProducts();
+                } catch (error) {
+                    alert("Error deleting: " + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
