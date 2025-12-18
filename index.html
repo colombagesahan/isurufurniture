@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Theme: Midnight Navy, Bronze, and Pearl */
-            --primary-color: #0f2b46; /* Midnight Navy - Represents Trust & Stability */
-            --secondary-color: #c5a059; /* Bronze Gold - Represents 45 Years of Excellence */
-            --accent-color: #5d4037; /* Wood Tone */
+            /* Theme: Midnight Navy, Bronze Gold, and Pearl White */
+            --primary-color: #0f2b46; /* Midnight Navy - Trust & Stability */
+            --secondary-color: #c5a059; /* Bronze Gold - Excellence */
             --text-color: #333333;
             --light-bg: #fdfbf7; /* Pearl White */
             --white: #ffffff;
-            --gray-border: #e6e6e6;
-            --font-family: 'Playfair Display', 'Georgia', serif;
+            --dark-overlay: rgba(15, 43, 70, 0.9);
+            --font-family: 'Playfair Display', 'Times New Roman', serif;
             --sans-font: 'Segoe UI', Roboto, sans-serif;
         }
 
@@ -27,38 +26,37 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* Header */
-        header { background-color: var(--white); border-bottom: 1px solid var(--gray-border); padding: 10px 0; }
-        .top-bar { background-color: var(--primary-color); color: var(--secondary-color); font-size: 0.85em; text-align: center; padding: 8px 0; letter-spacing: 1px; }
+        header { background-color: var(--white); border-bottom: 1px solid #eee; padding: 10px 0; }
+        .top-bar { background-color: var(--primary-color); color: var(--secondary-color); font-size: 0.85em; text-align: center; padding: 8px 0; letter-spacing: 1px; font-weight: 600; }
         
         .header-content { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
         .logo { display: flex; align-items: center; }
-        .logo img { height: 60px; margin-right: 15px; }
+        .logo img { height: 65px; margin-right: 15px; }
         .logo h1 { font-size: 2.2em; font-weight: 700; color: var(--primary-color); text-transform: uppercase; line-height: 1; }
-        .logo span { font-size: 0.4em; color: var(--secondary-color); display: block; letter-spacing: 2px; font-family: var(--sans-font); }
+        .logo span { font-size: 0.4em; color: var(--secondary-color); display: block; letter-spacing: 3px; font-family: var(--sans-font); font-weight: 700; }
         
-        .contact-info { text-align: right; font-size: 0.9em; color: var(--text-color); }
-        .contact-info div { margin-bottom: 5px; }
-        .contact-info i { color: var(--primary-color); width: 20px; text-align: center; }
+        .contact-header { text-align: right; font-size: 0.9em; color: var(--text-color); }
+        .contact-header div { margin-bottom: 5px; }
+        .contact-header i { color: var(--primary-color); width: 20px; text-align: center; }
 
         /* Navigation */
-        nav { background-color: var(--primary-color); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        nav { background-color: var(--primary-color); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border-bottom: 3px solid var(--secondary-color); }
         .nav-list { list-style: none; display: flex; justify-content: center; margin: 0; padding: 0; }
         .nav-list a { display: block; color: var(--white); text-decoration: none; font-weight: 500; padding: 18px 30px; transition: 0.3s; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; }
         .nav-list a:hover { background-color: var(--secondary-color); color: var(--primary-color); }
-
-        /* Mobile Toggle */
-        .menu-toggle { display: none; background: none; border: none; color: var(--secondary-color); font-size: 1.8em; position: absolute; right: 20px; top: 5px; cursor: pointer; }
+        
+        .menu-toggle { display: none; background: none; border: none; color: var(--secondary-color); font-size: 1.8em; position: absolute; right: 20px; top: 8px; cursor: pointer; }
 
         /* Hero Section */
-        .hero { background: linear-gradient(rgba(15, 43, 70, 0.8), rgba(15, 43, 70, 0.7)), url('bac.png') no-repeat center center/cover; color: var(--white); text-align: center; padding: 140px 20px; }
-        .hero h2 { font-size: 3.8em; margin-bottom: 15px; font-weight: 700; color: var(--secondary-color); }
-        .hero p { font-size: 1.5em; margin-bottom: 35px; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; color: #eee; }
-        .btn { display: inline-block; background-color: var(--secondary-color); color: var(--primary-color); padding: 12px 35px; text-decoration: none; border-radius: 4px; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; border: none; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3); }
-        .btn:hover { background-color: var(--white); color: var(--primary-color); transform: translateY(-3px); }
+        .hero { background: linear-gradient(rgba(15, 43, 70, 0.85), rgba(15, 43, 70, 0.7)), url('bac.png') no-repeat center center/cover; color: var(--white); text-align: center; padding: 140px 20px; position: relative; }
+        .hero h2 { font-size: 4em; margin-bottom: 15px; font-weight: 700; color: var(--secondary-color); text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.5em; margin-bottom: 35px; font-weight: 300; max-width: 800px; margin-left: auto; margin-right: auto; color: #f0f0f0; }
+        .btn { display: inline-block; background-color: var(--secondary-color); color: var(--primary-color); padding: 14px 40px; text-decoration: none; border-radius: 4px; font-weight: 700; text-transform: uppercase; transition: 0.3s; cursor: pointer; border: none; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3); }
+        .btn:hover { background-color: var(--white); transform: translateY(-3px); }
 
         /* Section Global */
         .section { padding: 90px 0; text-align: center; }
-        .section h3 { font-size: 2.5em; margin-bottom: 10px; color: var(--primary-color); }
+        .section h3 { font-size: 2.8em; margin-bottom: 10px; color: var(--primary-color); }
         .section-subtitle { font-family: var(--sans-font); color: var(--secondary-color); text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 40px; display: block; font-size: 0.9em; }
         .section p { font-size: 1.1em; max-width: 800px; margin: 0 auto 50px; color: #666; }
 
@@ -66,55 +64,79 @@
         .about-us { background-color: var(--white); text-align: left; }
         .about-content { display: flex; flex-wrap: wrap; align-items: center; gap: 60px; margin-top: 30px; }
         .about-image { flex: 1; min-width: 300px; position: relative; }
-        .about-image img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0 var(--secondary-color); }
+        .about-image img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0 var(--secondary-color); border: 1px solid #ddd; }
         .about-text { flex: 1.2; min-width: 300px; }
-        .about-text h4 { font-size: 1.8em; color: var(--primary-color); margin-bottom: 15px; }
+        .about-text h4 { font-size: 1.8em; color: var(--primary-color); margin-bottom: 20px; }
         .about-text p { margin-bottom: 15px; text-align: justify; line-height: 1.8; }
-        .director-sign { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
-        .director-sign strong { color: var(--primary-color); font-size: 1.1em; }
-        .director-sign span { display: block; font-size: 0.9em; color: var(--secondary-color); }
+        
+        .director-card { margin-top: 30px; padding: 20px; background: var(--light-bg); border-left: 5px solid var(--secondary-color); }
+        .director-card strong { color: var(--primary-color); font-size: 1.2em; display: block; font-family: var(--font-family); }
+        .director-card span { font-size: 0.9em; color: #777; }
 
-        /* Features */
-        .features { background-color: var(--light-bg); }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .feature-item { background: var(--white); padding: 40px 30px; border-radius: 8px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); }
-        .feature-item:hover { transform: translateY(-10px); border-bottom: 5px solid var(--secondary-color); }
-        .feature-item i { font-size: 3em; color: var(--secondary-color); margin-bottom: 20px; }
-        .feature-item h4 { font-size: 1.3em; margin-bottom: 10px; color: var(--primary-color); }
+        /* Why Choose Us (The 6-Grid) */
+        .why-choose-us { background-color: var(--light-bg); }
+        .why-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+        .why-item { background: var(--white); padding: 35px 25px; width: calc(33.333% - 20px); min-width: 300px; border: 1px solid #eee; text-align: left; border-radius: 6px; transition: 0.3s; }
+        .why-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-bottom: 3px solid var(--secondary-color); }
+        .why-item i { font-size: 2.2em; color: var(--secondary-color); margin-bottom: 15px; display: block; }
+        .why-item h4 { font-size: 1.3em; margin-bottom: 10px; color: var(--primary-color); font-weight: 700; }
+        .why-item p { font-size: 0.95em; margin: 0; color: #555; }
+
+        /* Services/Strengths (The 4-Grid) */
+        .features { background-color: var(--white); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 20px; }
+        .feature-item { padding: 40px 20px; border: 1px solid #f0f0f0; border-radius: 8px; transition: 0.3s; background: var(--light-bg); }
+        .feature-item:hover { background: var(--primary-color); color: white; transform: scale(1.02); }
+        .feature-item:hover h4, .feature-item:hover p, .feature-item:hover i { color: white; }
+        .feature-item i { font-size: 3em; color: var(--primary-color); margin-bottom: 20px; transition: 0.3s; }
+        .feature-item h4 { font-size: 1.4em; color: var(--primary-color); margin-bottom: 10px; transition: 0.3s; }
+        .feature-item p { color: #666; font-size: 1em; margin: 0; transition: 0.3s; }
 
         /* Products */
-        .products { background-color: var(--white); }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-        .product-card { background: var(--white); border: 1px solid #eee; transition: 0.3s; border-radius: 6px; overflow: hidden; }
-        .product-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .products { background-color: #f8f9fa; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: var(--white); border: 1px solid #eee; transition: 0.3s; border-radius: 6px; overflow: hidden; position: relative; }
+        .product-card:hover { box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--secondary-color); }
         .product-card img { width: 100%; height: 260px; object-fit: cover; }
         .product-info { padding: 25px; text-align: left; }
         .product-info h4 { font-size: 1.3em; margin-bottom: 8px; color: var(--primary-color); }
         .product-actions { display: flex; gap: 10px; margin-top: 15px; }
-        .product-actions .btn { padding: 10px; font-size: 0.85em; flex: 1; text-align: center; }
-        .add-to-cart { background-color: var(--primary-color); color: white; }
-        .btn-whatsapp { background-color: #25d366; color: white; }
+        .btn-sm { flex: 1; padding: 10px; font-size: 0.85em; text-align: center; border: none; cursor: pointer; border-radius: 3px; color: white; text-decoration: none; display: inline-block; }
+        .add-to-cart { background-color: var(--primary-color); }
+        .btn-whatsapp { background-color: #25d366; }
+
+        /* Testimonials */
+        .testimonials { background: var(--dark-overlay), url('bac.png') fixed center/cover; color: white; padding: 80px 20px; }
+        .testimonials h3 { color: white; }
+        .testimonial-carousel { max-width: 900px; margin: 0 auto; overflow: hidden; position: relative; }
+        .testimonial-card { text-align: center; padding: 20px; display: none; animation: fadeIn 0.8s; }
+        .testimonial-card.active { display: block; }
+        .testimonial-card i { font-size: 2.5em; color: var(--secondary-color); margin-bottom: 20px; }
+        .testimonial-card p { font-size: 1.4em; font-style: italic; font-family: var(--font-family); margin-bottom: 25px; line-height: 1.6; }
+        .testimonial-card span { font-weight: 700; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 1px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Contact & Socials */
-        .social-bar { margin: 20px 0; display: flex; gap: 15px; justify-content: flex-start; }
-        .social-link { width: 40px; height: 40px; background: var(--primary-color); color: white; display: flex; justify-content: center; align-items: center; border-radius: 50%; text-decoration: none; transition: 0.3s; }
-        .social-link:hover { background: var(--secondary-color); transform: rotate(360deg); }
-
-        .contact-section { background: var(--primary-color); color: white; position: relative; overflow: hidden; }
-        .contact-section h3, .contact-section p { color: white; }
-        .contact-section .section-subtitle { color: var(--secondary-color); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; text-align: left; }
+        .contact-section { background: var(--white); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; text-align: left; margin-top: 40px; }
         
-        .contact-form { background: white; padding: 40px; border-radius: 8px; color: var(--text-color); }
+        .contact-form { background: var(--light-bg); padding: 40px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--primary-color); }
         .contact-form label { color: var(--primary-color); font-weight: 700; display: block; margin-bottom: 8px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; background: white; }
         
-        .contact-details p { margin-bottom: 20px; display: flex; align-items: flex-start; font-size: 1.1em; color: rgba(255,255,255,0.9); }
+        .contact-info-block h4 { font-size: 1.8em; color: var(--primary-color); margin-bottom: 20px; }
+        .contact-details p { margin-bottom: 15px; display: flex; align-items: flex-start; font-size: 1.05em; color: #555; }
         .contact-details i { color: var(--secondary-color); margin-right: 15px; margin-top: 5px; font-size: 1.2em; }
-        .contact-details a { color: white; text-decoration: none; }
+        .contact-details a { color: inherit; text-decoration: none; font-weight: 600; }
+        
+        .social-bar { margin-top: 30px; display: flex; gap: 15px; }
+        .social-link { width: 45px; height: 45px; background: var(--primary-color); color: white; display: flex; justify-content: center; align-items: center; border-radius: 50%; text-decoration: none; transition: 0.3s; font-size: 1.2em; }
+        .social-link:hover { background: var(--secondary-color); transform: scale(1.1); }
+
+        #map-container { height: 300px; width: 100%; border-radius: 4px; overflow: hidden; margin-top: 25px; border: 1px solid #ddd; }
 
         /* Footer */
-        footer { background-color: #0a1d30; color: #888; text-align: center; padding: 50px 0; border-top: 5px solid var(--secondary-color); }
+        footer { background-color: #05101a; color: #888; text-align: center; padding: 50px 0; border-top: 4px solid var(--secondary-color); }
         footer a { color: var(--secondary-color); text-decoration: none; }
 
         /* Widgets */
@@ -122,33 +144,38 @@
         #cart-sidebar { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background-color: var(--white); box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1001; padding: 30px; transition: right 0.4s ease; display: flex; flex-direction: column; }
         #open-cart-btn { position: fixed; bottom: 110px; right: 30px; width: 60px; height: 60px; background-color: var(--primary-color); color: var(--secondary-color); border: 2px solid var(--secondary-color); border-radius: 50%; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; cursor: pointer; }
 
-        /* 300px Responsive Logic (Super Wonderful) */
+        /* 300px SUPER Responsive */
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .why-item { width: calc(50% - 20px); }
+        }
+
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 15px; }
-            .contact-info { text-align: center; margin-top: 10px; }
+            .contact-header { text-align: center; margin-top: 5px; }
             .menu-toggle { display: block; }
             .nav-list { display: none; flex-direction: column; width: 100%; padding: 10px 0; }
             .nav-list.active { display: flex; }
             .nav-list li { border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .hero h2 { font-size: 2.5em; }
-            .about-content, .contact-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2.8em; }
+            .about-content { flex-direction: column; }
+            .why-item { width: 100%; }
             #cart-sidebar { width: 100%; right: -100%; }
         }
 
         @media (max-width: 350px) {
-            .container { padding: 0 12px; }
+            .container { padding: 0 10px; }
             .logo h1 { font-size: 1.6em; }
+            .logo span { letter-spacing: 1px; font-size: 0.5em; }
             .hero { padding: 80px 10px; }
             .hero h2 { font-size: 2em; line-height: 1.2; }
-            .hero p { font-size: 1em; }
-            .section { padding: 60px 0; }
             .section h3 { font-size: 1.8em; }
-            .feature-item, .product-card { width: 100%; }
-            .contact-info { font-size: 0.8em; }
+            .why-item, .feature-item, .product-card { width: 100%; min-width: 100%; padding: 20px; }
+            .contact-header { font-size: 0.8em; }
             .whatsapp-float, #open-cart-btn { width: 50px; height: 50px; font-size: 24px; right: 15px; }
             #open-cart-btn { bottom: 75px; }
             .whatsapp-float { bottom: 15px; }
-            .btn { width: 100%; text-align: center; padding: 12px 10px; font-size: 0.9em; }
+            .btn { width: 100%; padding: 12px; font-size: 0.9em; }
             .product-actions { flex-direction: column; }
         }
     </style>
@@ -168,8 +195,8 @@
                     <span>OVER 45 YEARS OF EXCELLENCE</span>
                 </div>
             </div>
-            <div class="contact-info">
-                <div><i class="fas fa-phone-alt"></i> <a href="tel:+94758004160" style="color:inherit; text-decoration:none;">075 800 4160</a> | <a href="tel:+94777585682" style="color:inherit; text-decoration:none;">077 758 5682</a></div>
+            <div class="contact-header">
+                <div><i class="fas fa-phone-alt"></i> <a href="tel:+94758004160" style="color:inherit; text-decoration:none;">075 800 4160</a> | 077 758 5682</div>
                 <div><i class="fas fa-phone"></i> 011 265 2843</div>
                 <div><i class="fas fa-map-marker-alt"></i> 209/B, De Soysa Rd, Moratumulla</div>
             </div>
@@ -180,10 +207,12 @@
         <div class="container">
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <ul class="nav-list" id="navList">
-                <li><a href="#about">Our Legacy</a></li>
-                <li><a href="#features">Why Choose Us</a></li>
-                <li><a href="#products">Collection</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#why-choose-us">Why Choose Us</a></li>
+                <li><a href="#services">Our Craft</a></li>
+                <li><a href="#products">Catalogue</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -191,59 +220,99 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <h2>Timeless Elegance, Built to Last</h2>
-                <p>Experience over 45 years of Moratumulla's legendary craftsmanship. We create furniture that defines generations.</p>
-                <a href="#products" class="btn">View Catalogue</a>
+                <h2>Royal Comfort, Timeless Design</h2>
+                <p>Manufacturers of high-quality furniture that transforms houses into palaces. Directly from Moratumulla's finest craftsmen.</p>
+                <a href="#products" class="btn">View Our Collection</a>
             </div>
         </section>
 
         <section id="about" class="section about-us">
             <div class="container">
-                <h3>The Isuru Standard</h3>
+                <h3>The Isuru Legacy</h3>
                 <span class="section-subtitle">A Tradition of Quality</span>
-                
                 <div class="about-content">
                     <div class="about-image">
                         <img src="shop.png" alt="Isuru Furniture Workshop">
                     </div>
                     <div class="about-text">
-                        <h4>Four Decades of Mastery</h4>
-                        <p>Established in the heart of Moratuwa's carpentry hub, <strong>Isuru Furniture</strong> has been a beacon of quality for over 45 years. We don't just manufacture furniture; we craft heirlooms. From humble beginnings to becoming a trusted name in Sri Lanka, our journey is paved with the satisfaction of thousands of customers.</p>
-                        <p>Specializing in Teak, Mahogany, and Nadun, we combine traditional carving techniques with modern aesthetics. Every curve, joint, and polish is inspected to ensure it meets our rigorous standards.</p>
-                        <div class="director-sign">
+                        <h4>A Legacy of Manufacturing Excellence</h4>
+                        <p>At <strong>Isuru Furniture</strong>, we don't just sell furniture; we create it. Situated at No. 209/B, De Soysa Rd, Moratumulla—the heart of Sri Lankan carpentry—we pride ourselves on being direct manufacturers of premium quality furniture for over 45 years.</p>
+                        <p>Our journey is defined by a passion for wood and an eye for detail. Under the visionary leadership of our Managing Director, <strong>Mr. W. Lasantha Fernando</strong>, we have grown from a small workshop to a trusted brand known for durability and elegance.</p>
+                        <p>Unlike mass-produced items, every piece that leaves our workshop is inspected for structural integrity, finish, and aesthetic appeal. Whether you need a majestic teak bed or a modern sofa set, our artisans handcraft it to perfection.</p>
+                        
+                        <div class="director-card">
                             <strong>W. Lasantha Fernando</strong>
-                            <span>Managing Director</span>
+                            <span>Managing Director - Isuru Furniture</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="features" class="section features">
+        <section id="why-choose-us" class="section why-choose-us">
             <div class="container">
-                <h3>Why Isuru Furniture?</h3>
-                <span class="section-subtitle">Excellence in Every Detail</span>
+                <h3>Why Choose Isuru Furniture?</h3>
+                <span class="section-subtitle">We deliver more than just furniture</span>
                 
+                <div class="why-container">
+                    <div class="why-item">
+                        <i class="fas fa-industry"></i>
+                        <h4>Direct Manufacturer</h4>
+                        <p>No middlemen. You buy directly from our Moratumulla workshop, ensuring you get the best factory prices.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-crown"></i>
+                        <h4>Royal Designs</h4>
+                        <p>From intricate traditional carvings to sleek modern minimalism, our designs add royalty to your space.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-pencil-ruler"></i>
+                        <h4>Custom Fabrication</h4>
+                        <p>Have a specific design? We specialize in custom-made furniture. Bring a photo, and we will build it.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Durability Guaranteed</h4>
+                        <p>We use seasoned timber (Teak, Mahogany, Mara) and high-grade fabrics built for generations.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h4>Reliable Delivery</h4>
+                        <p>Safe and timely delivery services available to your doorstep with careful handling.</p>
+                    </div>
+                    <div class="why-item">
+                        <i class="fas fa-headset"></i>
+                        <h4>Dedicated Support</h4>
+                        <p>Call or WhatsApp us anytime. We assist with measurements, material selection, and after-sales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section features">
+            <div class="container">
+                <h3>Our Core Strengths</h3>
+                <span class="section-subtitle">What makes us the preferred choice</span>
                 <div class="features-grid">
                     <div class="feature-item">
-                        <i class="fas fa-history"></i>
-                        <h4>45+ Years Experience</h4>
-                        <p>We possess deep industry knowledge that only time can teach. Your furniture is built by seasoned masters.</p>
+                        <i class="fas fa-tree"></i>
+                        <h4>Premium Timber</h4>
+                        <p>We strictly use high-quality Teak, Mahogany, and Mara, properly seasoned to prevent warping.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-tools"></i>
-                        <h4>Custom Manufacturing</h4>
-                        <p>Bring us a design from anywhere in the world, and we will recreate it for you with premium local timber.</p>
+                        <i class="fas fa-paint-roller"></i>
+                        <h4>Precision Finish</h4>
+                        <p>Our spray painting and polishing techniques ensure a flawless, glass-like or matte finish.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-gem"></i>
-                        <h4>Premium Materials</h4>
-                        <p>We use only well-seasoned, treated timber and high-quality fabrics to ensure durability in our tropical climate.</p>
+                        <i class="fas fa-couch"></i>
+                        <h4>Comfort Focused</h4>
+                        <p>Ergonomics is key. Our sofas and chairs are designed for maximum comfort without compromising style.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-handshake"></i>
-                        <h4>Direct from Factory</h4>
-                        <p>Located at 209/B, De Soysa Rd, Moratumulla. Buy directly from us to get the best price without middleman margins.</p>
+                        <i class="fas fa-check-double"></i>
+                        <h4>Quality Control</h4>
+                        <p>Every joint, screw, and stitch is checked. We don't cut corners in manufacturing.</p>
                     </div>
                 </div>
             </div>
@@ -251,48 +320,84 @@
 
         <section id="products" class="section products">
             <div class="container">
-                <h3>Our Exclusive Collection</h3>
-                <span class="section-subtitle">Browse Our Latest Designs</span>
-                <p>From royal bedroom suites to contemporary living room setups.</p>
+                <h3>Our Product Catalogue</h3>
+                <span class="section-subtitle">Explore our latest creations</span>
 
                 <div class="product-grid" id="productGrid">
                     <!-- Products loaded via Firebase -->
-                    <p style="width:100%; text-align:center; padding: 40px; font-size:1.2em; color:var(--primary-color);">Loading our finest collection...</p>
+                    <p style="width:100%; text-align:center; font-size:1.2em; color:var(--primary-color);">Loading our collection...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="section testimonials">
+            <div class="container">
+                <h3>Customer Experiences</h3>
+                <span class="section-subtitle" style="color:#ddd;">What our clients say about us</span>
+                
+                <div class="testimonial-carousel">
+                    <div class="testimonial-card active">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"I visited Isuru Furniture in Moratumulla and was amazed by the quality. Mr. Lasantha helped me design a custom wardrobe. The finish is perfect. Highly recommended!"</p>
+                        <span>- Roshan Silva (Mount Lavinia)</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"We bought a full sofa set and dining table. The wood is solid and heavy, unlike the cheap stuff in showrooms. 45 years of experience really shows."</p>
+                        <span>- Mrs. K. Jayawardena (Piliyandala)</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Excellent service and genuine pricing. They delivered to Colombo on time. The finishing of the bed is absolutely royal."</p>
+                        <span>- A. Perera (Panadura)</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="section contact-section">
             <div class="container">
-                <h3>Connect With Us</h3>
-                <span class="section-subtitle">Let's Discuss Your Dream Furniture</span>
+                <h3>Get In Touch</h3>
+                <span class="section-subtitle">Visit our showroom or workshop</span>
 
                 <div class="contact-grid">
                     <div class="contact-info-block">
+                        <h4>Contact Details</h4>
                         <div class="contact-details">
-                            <p><i class="fas fa-map-marker-alt"></i> <span>209/B, De Soysa Rd,<br>Moratumulla, Moratuwa.</span></p>
-                            <p><i class="fas fa-phone-alt"></i> <span><a href="tel:0758004160">075 800 4160</a> / <a href="tel:0777585682">077 758 5682</a></span></p>
-                            <p><i class="fas fa-phone"></i> <span>011 265 2843 / 011 265 2582</span></p>
-                            <p><i class="fas fa-envelope"></i> <span>isurufurniture777@gmail.com</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span><strong>Address:</strong><br>209/B, De Soysa Rd,<br>Moratumulla, Moratuwa.</span></p>
+                            <p><i class="fab fa-whatsapp"></i> <span><strong>WhatsApp:</strong> <a href="https://wa.me/94777585682">077 758 5682</a></span></p>
+                            <p><i class="fas fa-phone-alt"></i> <span><strong>Call Us:</strong> <a href="tel:+94758004160">075 800 4160</a> / 011 265 2582</span></p>
+                            <p><i class="fas fa-envelope"></i> <span><strong>Email:</strong> isurufurniture777@gmail.com</span></p>
                         </div>
-                        
-                        <h4 style="color:white; margin-top:30px;">Follow Us</h4>
+
                         <div class="social-bar">
                             <a href="https://www.facebook.com/isuru.furniture" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://www.instagram.com/isuru.furniture" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
                             <a href="https://www.tiktok.com/@isuru.furniture" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
                         </div>
+
+                        <div id="map-container">
+                            <!-- Moratumulla Map -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15846.592532456!2d79.878!3d6.812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2450000000001%3A0x0!2sMoratumulla!5e0!3m2!1sen!2slk!4v1700000000000" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                            </iframe>
+                        </div>
                     </div>
 
                     <div class="contact-form">
+                        <h4>Send us a Message</h4>
                         <form id="contactForm">
-                            <label>Name</label>
-                            <input type="text" id="name" required>
-                            <label>Mobile Number</label>
-                            <input type="tel" id="phone" required>
-                            <label>Message / Inquiry</label>
-                            <textarea id="message" rows="4" required></textarea>
-                            <button type="submit" class="btn" style="width:100%;">Send Inquiry via WhatsApp</button>
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+
+                            <label for="phone">Your Mobile Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+
+                            <label for="message">Your Inquiry (Items, Custom Designs etc.)</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+
+                            <button type="submit" class="btn" style="width:100%;">Send via WhatsApp <i class="fab fa-whatsapp"></i></button>
                         </form>
                     </div>
                 </div>
@@ -304,26 +409,26 @@
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Isuru Furniture. All rights reserved.</p>
             <p>209/B, De Soysa Rd, Moratumulla, Moratuwa.</p>
-            <p style="font-size: 0.85em; opacity: 0.6; margin-top: 15px;">Web Solution by Sahan Colombage</p>
+            <p style="font-size: 0.85em; opacity: 0.6; margin-top: 15px;">Development by Sahan Colombage</p>
             <p><a href="admin.html" style="font-size: 0.8em; opacity: 0.5;">Admin Login</a></p>
         </div>
     </footer> 
 
-    <!-- Floating WhatsApp (Main Mobile) -->
+    <!-- Floating WhatsApp -->
     <a href="https://wa.me/94777585682" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Cart Sidebar -->
     <div id="cart-sidebar">
-        <h3 style="color:var(--primary-color); border-bottom:2px solid var(--secondary-color); padding-bottom:10px;">Quote Request (<span id="cart-count">0</span>)</h3>
+        <h3 style="color:var(--primary-color); border-bottom:2px solid var(--secondary-color); padding-bottom:10px;">Quote List (<span id="cart-count">0</span>)</h3>
         <div id="cart-items" style="flex-grow:1; overflow-y:auto; margin: 20px 0;">
-            <p style="color:#777; font-style:italic;">No items selected.</p>
+            <p style="color:#777; font-style:italic;">Your list is empty.</p>
         </div>
         <div style="border-top:1px solid #ddd; padding-top:20px;">
-            <p style="font-size:1.1em; margin-bottom:15px; color:var(--text-color);"><strong>Total Estimate: Rs. <span id="cart-total">0</span></strong></p>
-            <button id="checkout-whatsapp" class="btn btn-whatsapp" style="width: 100%; margin-bottom: 10px; border-radius:4px;"><i class="fab fa-whatsapp"></i> Send List to MD</button>
-            <button id="close-cart" class="btn" style="width: 100%; background-color: #7f8c8d; color: white; border-radius:4px;">Close</button>
+            <p style="font-size:1.1em; margin-bottom:15px; color:var(--text-color);"><strong>Estimate: Rs. <span id="cart-total">0</span></strong></p>
+            <button id="checkout-whatsapp" class="btn btn-whatsapp" style="width: 100%; margin-bottom: 10px; border-radius:4px;"><i class="fab fa-whatsapp"></i> Send to MD</button>
+            <button id="close-cart" class="btn" style="width: 100%; background-color: #7f8c8d; color: white; border-radius:4px;">Close Panel</button>
         </div>
     </div>
 
@@ -336,7 +441,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // Same Firebase Config
+        // Configuration
         const firebaseConfig = {
           apiKey: "AIzaSyBUjzMFao9BS3uXBOW3qYrLVqHaGn8qIk4",
           authDomain: "onlineshop-30cd1.firebaseapp.com",
@@ -350,6 +455,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Load Products
         const productGrid = document.getElementById('productGrid');
         
         async function loadProducts() {
@@ -358,7 +464,7 @@
                 productGrid.innerHTML = ''; 
                 
                 if(querySnapshot.empty) {
-                    productGrid.innerHTML = '<p>No products available currently.</p>';
+                    productGrid.innerHTML = '<p>No products loaded yet.</p>';
                     return;
                 }
 
@@ -373,11 +479,11 @@
                         <img src="${data.imageUrl}" alt="${data.name}">
                         <div class="product-info">
                             <h4>${data.name}</h4>
-                            <p style="font-size:0.9em; color:#666; min-height:40px;">${data.description}</p>
-                            <p style="color:var(--secondary-color); font-weight:bold; font-size:1.2em; margin: 10px 0;">${priceDisplay}</p>
+                            <p style="font-size:0.9em; color:#666; margin-bottom:10px;">${data.description}</p>
+                            <p style="color:var(--secondary-color); font-weight:bold; font-size:1.2em;">${priceDisplay}</p>
                             <div class="product-actions">
-                                ${!isCallNow ? `<button class="btn add-to-cart" data-name="${data.name}" data-price="${data.price}"><i class="fas fa-plus-circle"></i> Add to Quote</button>` : ''}
-                                <a href="https://wa.me/94777585682?text=Hi%20Isuru%20Furniture,%20I%20am%20interested%20in%20${encodeURIComponent(data.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
+                                ${!isCallNow ? `<button class="btn-sm add-to-cart" data-name="${data.name}" data-price="${data.price}"><i class="fas fa-plus"></i> Add List</button>` : ''}
+                                <a href="https://wa.me/94777585682?text=Hi%20Isuru%20Furniture,%20I%20am%20interested%20in%20${encodeURIComponent(data.name)}" target="_blank" class="btn-sm btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
                             </div>
                         </div>
                     `;
@@ -405,7 +511,6 @@
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const message = document.getElementById('message').value;
-            // Sending to main mobile 0777585682
             const text = `*New Inquiry - Isuru Furniture*\n\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`;
             window.open(`https://wa.me/94777585682?text=${encodeURIComponent(text)}`, '_blank');
             this.reset();
@@ -428,7 +533,7 @@
             itemsDiv.innerHTML = '';
             let total = 0;
             
-            if(!cart.length) itemsDiv.innerHTML = '<p style="color:#777; padding:10px;">Your quote list is empty.</p>';
+            if(!cart.length) itemsDiv.innerHTML = '<p style="color:#777; padding:10px;">Your list is empty.</p>';
             else {
                 cart.forEach((item, i) => {
                     total += item.price;
@@ -468,23 +573,32 @@
             });
         }
 
-        document.getElementById('open-cart-btn').addEventListener('click', () => cartSidebar.style.right = '0';
-        document.getElementById('close-cart').addEventListener('click', () => cartSidebar.style.right = '-400px';
+        document.getElementById('open-cart-btn').addEventListener('click', () => cartSidebar.style.right = '0');
+        document.getElementById('close-cart').addEventListener('click', () => cartSidebar.style.right = '-400px');
 
         document.getElementById('checkout-whatsapp').addEventListener('click', () => {
             if(!cart.length) return alert("Please select items first.");
-            let msg = "*Quote Request - Isuru Furniture*\n\nI am interested in:\n";
+            let msg = "*Order Inquiry - Isuru Furniture*\n\nI am interested in:\n";
             let total = 0;
             cart.forEach(item => {
                 msg += `- ${item.product} (Rs. ${item.price.toLocaleString()})\n`;
                 total += item.price;
             });
-            msg += `\n*Total Value: Rs. ${total.toLocaleString()}*`;
+            msg += `\n*Total Estimated: Rs. ${total.toLocaleString()}*`;
             window.open(`https://wa.me/94777585682?text=${encodeURIComponent(msg)}`, '_blank');
             cart = [];
             updateCartUI();
             cartSidebar.style.right = '-400px';
         });
+
+        // Testimonial Carousel
+        const carousel = document.querySelectorAll('.testimonial-card');
+        let currentIdx = 0;
+        setInterval(() => {
+            carousel[currentIdx].classList.remove('active');
+            currentIdx = (currentIdx + 1) % carousel.length;
+            carousel[currentIdx].classList.add('active');
+        }, 5000);
 
     </script>
 </body>
