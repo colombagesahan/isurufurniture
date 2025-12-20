@@ -94,6 +94,19 @@
 
         /* Products */
         .products { background-color: #f8f9fa; }
+        
+        /* Category Styles */
+        .category-block { margin-bottom: 60px; }
+        .category-title { 
+            text-align: left; 
+            font-size: 1.8em; 
+            color: var(--primary-color); 
+            border-left: 5px solid var(--secondary-color); 
+            padding-left: 15px; 
+            margin-bottom: 25px; 
+            font-weight: 700;
+        }
+
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .product-card { background: var(--white); border: 1px solid #eee; transition: 0.3s; border-radius: 6px; overflow: hidden; position: relative; }
         .product-card:hover { box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--secondary-color); }
@@ -225,6 +238,19 @@
                 <a href="#products" class="btn">View Our Collection</a>
             </div>
         </section>
+		
+		<section id="products" class="section products">
+            <div class="container">
+                <h3>Our Product Catalogue</h3>
+                <span class="section-subtitle">Explore our latest creations</span>
+
+                <!-- Changed id to catalogContent to serve as a wrapper for multiple categories -->
+                <div id="catalogContent">
+                    <!-- Products loaded via Firebase will create headers and grids here -->
+                    <p style="width:100%; text-align:center; font-size:1.2em; color:var(--primary-color);">Loading our collection...</p>
+                </div>
+            </div>
+        </section>
 
         <section id="about" class="section about-us">
             <div class="container">
@@ -318,17 +344,7 @@
             </div>
         </section>
 
-        <section id="products" class="section products">
-            <div class="container">
-                <h3>Our Product Catalogue</h3>
-                <span class="section-subtitle">Explore our latest creations</span>
-
-                <div class="product-grid" id="productGrid">
-                    <!-- Products loaded via Firebase -->
-                    <p style="width:100%; text-align:center; font-size:1.2em; color:var(--primary-color);">Loading our collection...</p>
-                </div>
-            </div>
-        </section>
+        
 
         <section id="reviews" class="section testimonials">
             <div class="container">
@@ -365,7 +381,7 @@
                         <h4>Contact Details</h4>
                         <div class="contact-details">
                             <p><i class="fas fa-map-marker-alt"></i> <span><strong>Address:</strong><br>209/B, De Soysa Rd,<br>Moratumulla, Moratuwa.</span></p>
-                            <p><i class="fab fa-whatsapp"></i> <span><strong>WhatsApp:</strong> <a href="https://wa.me/94777585682">077 758 5682</a></span></p>
+                            <p><i class="fab fa-whatsapp"></i> <span><strong>WhatsApp:</strong> <a href="https://wa.me/94758004160">075 800 4160</a></span></p>
                             <p><i class="fas fa-phone-alt"></i> <span><strong>Call Us:</strong> <a href="tel:+94758004160">075 800 4160</a> / 011 265 2582</span></p>
                             <p><i class="fas fa-envelope"></i> <span><strong>Email:</strong> isurufurniture777@gmail.com</span></p>
                         </div>
@@ -415,7 +431,7 @@
     </footer> 
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/94777585682" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/94758004160" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -443,56 +459,93 @@
 
         // Configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyBUjzMFao9BS3uXBOW3qYrLVqHaGn8qIk4",
-          authDomain: "onlineshop-30cd1.firebaseapp.com",
-          projectId: "onlineshop-30cd1",
-          storageBucket: "onlineshop-30cd1.firebasestorage.app",
-          messagingSenderId: "818252574868",
-          appId: "1:818252574868:web:8dd36825db589a886cc481",
-          measurementId: "G-6YLGGH2NDD"
+          apiKey: "AIzaSyBqYX2_DlWUDA2fuRfxB2KRbSkYJDExaQY",
+          authDomain: "isuru-ee303.firebaseapp.com",
+          projectId: "isuru-ee303",
+          storageBucket: "isuru-ee303.firebasestorage.app",
+          messagingSenderId: "7475328492",
+          appId: "1:7475328492:web:122b21eec2885b941cbcc9",
+          measurementId: "G-0VJBMSTF7G"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Load Products
-        const productGrid = document.getElementById('productGrid');
+        // Load Products with Categories
+        const catalogContent = document.getElementById('catalogContent');
         
         async function loadProducts() {
             try {
                 const querySnapshot = await getDocs(collection(db, "products"));
-                productGrid.innerHTML = ''; 
+                catalogContent.innerHTML = ''; 
                 
                 if(querySnapshot.empty) {
-                    productGrid.innerHTML = '<p>No products loaded yet.</p>';
+                    catalogContent.innerHTML = '<p>No products loaded yet.</p>';
                     return;
                 }
 
+                // Group products by category
+                const groupedProducts = {};
+
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    const isCallNow = data.priceType === 'call';
-                    const priceDisplay = isCallNow ? 'Call for Price' : `Rs. ${parseInt(data.price).toLocaleString()}`;
+                    // Default to 'General' if no category is saved
+                    const category = data.category || 'General Collection';
                     
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <img src="${data.imageUrl}" alt="${data.name}">
-                        <div class="product-info">
-                            <h4>${data.name}</h4>
-                            <p style="font-size:0.9em; color:#666; margin-bottom:10px;">${data.description}</p>
-                            <p style="color:var(--secondary-color); font-weight:bold; font-size:1.2em;">${priceDisplay}</p>
-                            <div class="product-actions">
-                                ${!isCallNow ? `<button class="btn-sm add-to-cart" data-name="${data.name}" data-price="${data.price}"><i class="fas fa-plus"></i> Add List</button>` : ''}
-                                <a href="https://wa.me/94777585682?text=Hi%20Isuru%20Furniture,%20I%20am%20interested%20in%20${encodeURIComponent(data.name)}" target="_blank" class="btn-sm btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
-                            </div>
-                        </div>
-                    `;
-                    productGrid.appendChild(card);
+                    if (!groupedProducts[category]) {
+                        groupedProducts[category] = [];
+                    }
+                    groupedProducts[category].push(data);
                 });
+
+                // Iterate through categories and create sections
+                // We sort keys to keep order consistent if needed, or leave as is
+                for (const [categoryName, items] of Object.entries(groupedProducts)) {
+                    
+                    // Create Category Block
+                    const catBlock = document.createElement('div');
+                    catBlock.className = 'category-block';
+
+                    // Create Title
+                    const catTitle = document.createElement('h4');
+                    catTitle.className = 'category-title';
+                    catTitle.innerText = categoryName;
+                    catBlock.appendChild(catTitle);
+
+                    // Create Grid
+                    const grid = document.createElement('div');
+                    grid.className = 'product-grid';
+
+                    // Add items to grid
+                    items.forEach(data => {
+                        const isCallNow = data.priceType === 'call';
+                        const priceDisplay = isCallNow ? 'Call for Price' : `Rs. ${parseInt(data.price).toLocaleString()}`;
+                        
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                            <img src="${data.imageUrl}" alt="${data.name}">
+                            <div class="product-info">
+                                <h4>${data.name}</h4>
+                                <p style="font-size:0.9em; color:#666; margin-bottom:10px;">${data.description}</p>
+                                <p style="color:var(--secondary-color); font-weight:bold; font-size:1.2em;">${priceDisplay}</p>
+                                <div class="product-actions">
+                                    ${!isCallNow ? `<button class="btn-sm add-to-cart" data-name="${data.name}" data-price="${data.price}"><i class="fas fa-plus"></i> Add List</button>` : ''}
+                                    <a href="https://wa.me/94758004160?text=Hi%20Isuru%20Furniture,%20I%20am%20interested%20in%20${encodeURIComponent(data.name)}" target="_blank" class="btn-sm btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
+                                </div>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+
+                    catBlock.appendChild(grid);
+                    catalogContent.appendChild(catBlock);
+                }
+
                 attachCartListeners();
             } catch (error) {
                 console.error("Error:", error);
-                productGrid.innerHTML = '<p>Loading failed. Please check connection.</p>';
+                catalogContent.innerHTML = '<p>Loading failed. Please check connection.</p>';
             }
         }
         loadProducts();
@@ -512,7 +565,7 @@
             const phone = document.getElementById('phone').value;
             const message = document.getElementById('message').value;
             const text = `*New Inquiry - Isuru Furniture*\n\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`;
-            window.open(`https://wa.me/94777585682?text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://wa.me/94758004160?text=${encodeURIComponent(text)}`, '_blank');
             this.reset();
         });
 
@@ -585,7 +638,7 @@
                 total += item.price;
             });
             msg += `\n*Total Estimated: Rs. ${total.toLocaleString()}*`;
-            window.open(`https://wa.me/94777585682?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/94758004160?text=${encodeURIComponent(msg)}`, '_blank');
             cart = [];
             updateCartUI();
             cartSidebar.style.right = '-400px';
